@@ -1,10 +1,8 @@
 const channel = document.querySelector(".channel");
 const youtubeChannel = document.querySelector("iframe");
+const channelTitle = document.querySelector(".channel-title");
 
 let channelNumber = "";
-let currentChannel = "";
-let prevChannel = "";
-
 let switchChannel;
 
 const KEY = "AIzaSyAi7aqZ8KEGvgkRzEIa_QEtczjSwB_oNb8";
@@ -31,6 +29,7 @@ const fetchYoutube = async () => {
 const channelValidation = () => {
   if (channelNumber <= 150 && channelNumber >= 2) {
     fetchYoutube().catch((err) => alert(err.message));
+    channelTitle.textContent = `this is channel ${channelNumber}`;
   }
 
   channelNumber = "";
@@ -42,9 +41,7 @@ window.addEventListener("keydown", (e) => {
     channelNumber += e.key;
   }
 
-  if (switchChannel) {
-    clearTimeout(switchChannel);
-  }
+  if (switchChannel) clearTimeout(switchChannel);
 
   switchChannel = setTimeout(channelValidation, 2000);
 
